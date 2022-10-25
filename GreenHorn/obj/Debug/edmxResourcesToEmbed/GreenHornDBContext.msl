@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GreenHorneDBModelStoreContainer" CdmEntityContainer="GreenHorneDBEntities">
+    <EntitySetMapping Name="applications">
+      <EntityTypeMapping TypeName="GreenHorneDBModel.application">
+        <MappingFragment StoreEntitySet="applications">
+          <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+          <ScalarProperty Name="positionId" ColumnName="positionId" />
+          <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updatedAt" ColumnName="updatedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="candidates">
+      <EntityTypeMapping TypeName="GreenHorneDBModel.candidate">
+        <MappingFragment StoreEntitySet="candidates">
+          <ScalarProperty Name="candidateId" ColumnName="candidateId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="cvfileId" ColumnName="cvfileId" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="statusDate" ColumnName="statusDate" />
+          <ScalarProperty Name="notes" ColumnName="notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="companies">
+      <EntityTypeMapping TypeName="GreenHorneDBModel.company">
+        <MappingFragment StoreEntitySet="companies">
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cvfiles">
+      <EntityTypeMapping TypeName="GreenHorneDBModel.cvfile">
+        <MappingFragment StoreEntitySet="cvfiles">
+          <ScalarProperty Name="cvfileId" ColumnName="cvfileId" />
+          <ScalarProperty Name="fileData" ColumnName="fileData" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="industries">
+      <EntityTypeMapping TypeName="GreenHorneDBModel.industry">
+        <MappingFragment StoreEntitySet="industries">
+          <ScalarProperty Name="industryId" ColumnName="industryId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="positions">
+      <EntityTypeMapping TypeName="GreenHorneDBModel.position">
+        <MappingFragment StoreEntitySet="positions">
+          <ScalarProperty Name="positionId" ColumnName="positionId" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="industryId" ColumnName="industryId" />
+          <ScalarProperty Name="requirements" ColumnName="requirements" />
+          <ScalarProperty Name="companyId" ColumnName="companyId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="GreenHorneDBModel.user">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

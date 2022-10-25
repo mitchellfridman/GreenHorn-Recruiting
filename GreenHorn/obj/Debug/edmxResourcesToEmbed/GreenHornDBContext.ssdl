@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GreenHorneDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="applications">
+    <Key>
+      <PropertyRef Name="applicationId" />
+    </Key>
+    <Property Name="applicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="positionId" Type="int" Nullable="false" />
+    <Property Name="candidateId" Type="int" Nullable="false" />
+    <Property Name="status" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="createdAt" Type="datetime" Nullable="false" />
+    <Property Name="updatedAt" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="candidates">
+    <Key>
+      <PropertyRef Name="candidateId" />
+    </Key>
+    <Property Name="candidateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="cvfileId" Type="int" Nullable="false" />
+    <Property Name="status" Type="nvarchar" MaxLength="100" />
+    <Property Name="statusDate" Type="datetime" Nullable="false" />
+    <Property Name="notes" Type="text" />
+  </EntityType>
+  <EntityType Name="companies">
+    <Key>
+      <PropertyRef Name="companyId" />
+    </Key>
+    <Property Name="companyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="address" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="phone" Type="nvarchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="cvfiles">
+    <Key>
+      <PropertyRef Name="cvfileId" />
+    </Key>
+    <Property Name="cvfileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fileData" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="industries">
+    <Key>
+      <PropertyRef Name="industryId" />
+    </Key>
+    <Property Name="industryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="positions">
+    <Key>
+      <PropertyRef Name="positionId" />
+    </Key>
+    <Property Name="positionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="type" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="industryId" Type="int" Nullable="false" />
+    <Property Name="requirements" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="companyId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_applications_candidates">
+    <End Role="candidates" Type="Self.candidates" Multiplicity="1" />
+    <End Role="applications" Type="Self.applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="candidates">
+        <PropertyRef Name="candidateId" />
+      </Principal>
+      <Dependent Role="applications">
+        <PropertyRef Name="candidateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_applications_positions">
+    <End Role="positions" Type="Self.positions" Multiplicity="1" />
+    <End Role="applications" Type="Self.applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="positions">
+        <PropertyRef Name="positionId" />
+      </Principal>
+      <Dependent Role="applications">
+        <PropertyRef Name="positionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_candidates_cvfiles">
+    <End Role="cvfiles" Type="Self.cvfiles" Multiplicity="1" />
+    <End Role="candidates" Type="Self.candidates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="cvfiles">
+        <PropertyRef Name="cvfileId" />
+      </Principal>
+      <Dependent Role="candidates">
+        <PropertyRef Name="cvfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_positions_companies">
+    <End Role="companies" Type="Self.companies" Multiplicity="1" />
+    <End Role="positions" Type="Self.positions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="companies">
+        <PropertyRef Name="companyId" />
+      </Principal>
+      <Dependent Role="positions">
+        <PropertyRef Name="companyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_positions_industries">
+    <End Role="industries" Type="Self.industries" Multiplicity="1" />
+    <End Role="positions" Type="Self.positions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="industries">
+        <PropertyRef Name="industryId" />
+      </Principal>
+      <Dependent Role="positions">
+        <PropertyRef Name="industryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GreenHorneDBModelStoreContainer">
+    <EntitySet Name="applications" EntityType="Self.applications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="candidates" EntityType="Self.candidates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="companies" EntityType="Self.companies" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="cvfiles" EntityType="Self.cvfiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="industries" EntityType="Self.industries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="positions" EntityType="Self.positions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_applications_candidates" Association="Self.fk_applications_candidates">
+      <End Role="candidates" EntitySet="candidates" />
+      <End Role="applications" EntitySet="applications" />
+    </AssociationSet>
+    <AssociationSet Name="fk_applications_positions" Association="Self.fk_applications_positions">
+      <End Role="positions" EntitySet="positions" />
+      <End Role="applications" EntitySet="applications" />
+    </AssociationSet>
+    <AssociationSet Name="fk_candidates_cvfiles" Association="Self.fk_candidates_cvfiles">
+      <End Role="cvfiles" EntitySet="cvfiles" />
+      <End Role="candidates" EntitySet="candidates" />
+    </AssociationSet>
+    <AssociationSet Name="fk_positions_companies" Association="Self.fk_positions_companies">
+      <End Role="companies" EntitySet="companies" />
+      <End Role="positions" EntitySet="positions" />
+    </AssociationSet>
+    <AssociationSet Name="fk_positions_industries" Association="Self.fk_positions_industries">
+      <End Role="industries" EntitySet="industries" />
+      <End Role="positions" EntitySet="positions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
